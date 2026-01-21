@@ -70,7 +70,8 @@ teste-govbr-ds/
 
 O projeto usa uma **arquitetura CSS organizada em 3 camadas**:
 
-#### **`src/index.css` - Base Global** 
+#### **`src/index.css` - Base Global**
+
 - Define variáveis CSS (cores, tipografia, espaçamento)
 - Reset CSS unificado e consistente
 - Importado automaticamente no `main.tsx`
@@ -90,16 +91,19 @@ O projeto usa uma **arquitetura CSS organizada em 3 camadas**:
 ```
 
 #### **`src/styles/govbr.css` - Imports Centralizados**
+
 - Importa `@govbr-ds/core/dist/core-tokens.min.css`
 - Importa `@fortawesome/fontawesome-free/css/all.min.css`
 - Único ponto de entrada para bibliotecas externas
 
 #### **`src/App.css` - Estilos da Aplicação**
+
 - Importa `./styles/govbr.css` (uma única vez)
 - Contém estilos específicos (Header, Menu, Layout, etc.)
 - Usa variáveis definidas em `index.css`
 
 **Fluxo de imports:**
+
 ```
 main.tsx
   ↓
@@ -115,7 +119,7 @@ styles/govbr.css (core-tokens + fontawesome)
 No arquivo `src/main.tsx`, importe apenas:
 
 ```typescript
-import "./index.css";  // Base global (inclui tudo via App.css)
+import "./index.css"; // Base global (inclui tudo via App.css)
 import App from "./App";
 ```
 
@@ -135,10 +139,7 @@ export default function Exemplo() {
 
   return (
     <div>
-      <BrButton 
-        emphasis="primary" 
-        onBrClick={handleClick}
-      >
+      <BrButton emphasis="primary" onBrClick={handleClick}>
         Clique aqui
       </BrButton>
 
@@ -146,10 +147,7 @@ export default function Exemplo() {
         <div slot="content">Conteúdo do card</div>
       </BrCard>
 
-      <BrInput 
-        label="Seu nome" 
-        placeholder="Digite seu nome" 
-      />
+      <BrInput label="Seu nome" placeholder="Digite seu nome" />
     </div>
   );
 }
@@ -163,7 +161,7 @@ Os componentes Gov BR DS disparam eventos customizados. Use o prefixo `onBr`:
 // Evento: br-click → onBrClick
 <BrButton onBrClick={handleClick}>Botão</BrButton>
 
-// Evento: br-change → onBrChange  
+// Evento: br-change → onBrChange
 <BrInput onBrChange={(ev) => console.log(ev.detail.value)} />
 ```
 
