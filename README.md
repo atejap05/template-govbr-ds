@@ -66,17 +66,62 @@ teste-govbr-ds/
 
 ## 💡 Dicas de Uso
 
-### 1. Importar Estilos Base (OBRIGATÓRIO)
+### 1. Estrutura de Estilos CSS (Refatorada)
 
-No arquivo `src/main.tsx`, certifique-se de importar os estilos globais:
+O projeto usa uma **arquitetura CSS organizada em 3 camadas**:
 
-```typescript
-import "@govbr-ds/core/dist/core-tokens.min.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./index.css";
+#### **`src/index.css` - Base Global** 
+- Define variáveis CSS (cores, tipografia, espaçamento)
+- Reset CSS unificado e consistente
+- Importado automaticamente no `main.tsx`
+
+```css
+:root {
+  --primary-color: #0050f0;
+  --light-bg: #f5f5f5;
+  /* ... outros tokens ... */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 ```
 
-### 2. Usar Componentes Gov BR DS
+#### **`src/styles/govbr.css` - Imports Centralizados**
+- Importa `@govbr-ds/core/dist/core-tokens.min.css`
+- Importa `@fortawesome/fontawesome-free/css/all.min.css`
+- Único ponto de entrada para bibliotecas externas
+
+#### **`src/App.css` - Estilos da Aplicação**
+- Importa `./styles/govbr.css` (uma única vez)
+- Contém estilos específicos (Header, Menu, Layout, etc.)
+- Usa variáveis definidas em `index.css`
+
+**Fluxo de imports:**
+```
+main.tsx
+  ↓
+index.css (variáveis + reset)
+  ↓
+App.css
+  ↓
+styles/govbr.css (core-tokens + fontawesome)
+```
+
+### 2. Importar Estilos no Projeto
+
+No arquivo `src/main.tsx`, importe apenas:
+
+```typescript
+import "./index.css";  // Base global (inclui tudo via App.css)
+import App from "./App";
+```
+
+> **Nota:** Os imports de `@govbr-ds/core` e FontAwesome são gerenciados automaticamente via `styles/govbr.css` → `App.css`.
+
+### 3. Usar Componentes Gov BR DS
 
 No seu componente React, importe e use normalmente:
 
@@ -90,7 +135,10 @@ export default function Exemplo() {
 
   return (
     <div>
-      <BrButton emphasis="primary" onBrClick={handleClick}>
+      <BrButton 
+        emphasis="primary" 
+        onBrClick={handleClick}
+      >
         Clique aqui
       </BrButton>
 
@@ -98,13 +146,16 @@ export default function Exemplo() {
         <div slot="content">Conteúdo do card</div>
       </BrCard>
 
-      <BrInput label="Seu nome" placeholder="Digite seu nome" />
+      <BrInput 
+        label="Seu nome" 
+        placeholder="Digite seu nome" 
+      />
     </div>
   );
 }
 ```
 
-### 3. Acessar Eventos Customizados
+### 4. Acessar Eventos Customizados
 
 Os componentes Gov BR DS disparam eventos customizados. Use o prefixo `onBr`:
 
@@ -112,11 +163,11 @@ Os componentes Gov BR DS disparam eventos customizados. Use o prefixo `onBr`:
 // Evento: br-click → onBrClick
 <BrButton onBrClick={handleClick}>Botão</BrButton>
 
-// Evento: br-change → onBrChange
+// Evento: br-change → onBrChange  
 <BrInput onBrChange={(ev) => console.log(ev.detail.value)} />
 ```
 
-### 4. Props e Atributos
+### 5. Props e Atributos
 
 Consulte os tipos TypeScript disponíveis no seu IDE:
 
@@ -130,7 +181,7 @@ const buttonProps: BrButtonProps = {
 };
 ```
 
-### 5. Usar Slots para Conteúdo
+### 6. Usar Slots para Conteúdo
 
 Alguns componentes usam `slots` para permitir conteúdo customizado:
 
