@@ -2,14 +2,10 @@ import { useState } from "react";
 import {
   BrButton,
   BrCard,
-  BrDivider,
-  BrList,
-  BrItem,
   BrInput,
   BrMessage,
   BrTab,
   BrTabItem,
-  BrLoading,
 } from "@govbr-ds/webcomponents-react";
 import "./App.css";
 
