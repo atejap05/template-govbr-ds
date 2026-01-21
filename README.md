@@ -7,6 +7,7 @@ Um **template prático e funcional** para começar a desenvolver aplicações Re
 ## 🎯 O que é este template?
 
 Este projeto serve como **ponto de partida** para:
+
 - ✅ Aprender a usar os componentes da biblioteca `@govbr-ds/webcomponents-react`
 - ✅ Implementar interfaces seguindo os padrões e boas práticas do Gov BR DS
 - ✅ Consultar exemplos de componentes e sua integração com React
@@ -70,9 +71,9 @@ teste-govbr-ds/
 No arquivo `src/main.tsx`, certifique-se de importar os estilos globais:
 
 ```typescript
-import '@govbr-ds/core/dist/core-tokens.min.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
-import './index.css'
+import "@govbr-ds/core/dist/core-tokens.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./index.css";
 ```
 
 ### 2. Usar Componentes Gov BR DS
@@ -80,34 +81,26 @@ import './index.css'
 No seu componente React, importe e use normalmente:
 
 ```tsx
-import { BrButton, BrCard, BrInput } from '@govbr-ds/webcomponents-react'
+import { BrButton, BrCard, BrInput } from "@govbr-ds/webcomponents-react";
 
 export default function Exemplo() {
   const handleClick = (ev: CustomEvent) => {
-    console.log('Botão clicado:', ev.detail)
-  }
+    console.log("Botão clicado:", ev.detail);
+  };
 
   return (
     <div>
-      <BrButton 
-        emphasis="primary" 
-        onBrClick={handleClick}
-      >
+      <BrButton emphasis="primary" onBrClick={handleClick}>
         Clique aqui
       </BrButton>
 
       <BrCard hover={true}>
-        <div slot="content">
-          Conteúdo do card
-        </div>
+        <div slot="content">Conteúdo do card</div>
       </BrCard>
 
-      <BrInput 
-        label="Seu nome" 
-        placeholder="Digite seu nome"
-      />
+      <BrInput label="Seu nome" placeholder="Digite seu nome" />
     </div>
-  )
+  );
 }
 ```
 
@@ -119,7 +112,7 @@ Os componentes Gov BR DS disparam eventos customizados. Use o prefixo `onBr`:
 // Evento: br-click → onBrClick
 <BrButton onBrClick={handleClick}>Botão</BrButton>
 
-// Evento: br-change → onBrChange  
+// Evento: br-change → onBrChange
 <BrInput onBrChange={(ev) => console.log(ev.detail.value)} />
 ```
 
@@ -128,13 +121,13 @@ Os componentes Gov BR DS disparam eventos customizados. Use o prefixo `onBr`:
 Consulte os tipos TypeScript disponíveis no seu IDE:
 
 ```tsx
-import type { BrButtonProps } from '@govbr-ds/webcomponents-react'
+import type { BrButtonProps } from "@govbr-ds/webcomponents-react";
 
 const buttonProps: BrButtonProps = {
-  emphasis: 'primary',
+  emphasis: "primary",
   disabled: false,
-  size: 'md'
-}
+  size: "md",
+};
 ```
 
 ### 5. Usar Slots para Conteúdo
@@ -142,7 +135,7 @@ const buttonProps: BrButtonProps = {
 Alguns componentes usam `slots` para permitir conteúdo customizado:
 
 ```tsx
-import { BrCard } from '@govbr-ds/webcomponents-react'
+import { BrCard } from "@govbr-ds/webcomponents-react";
 
 export default function CardExemplo() {
   return (
@@ -151,7 +144,7 @@ export default function CardExemplo() {
       <p slot="content">Conteúdo principal</p>
       <div slot="footer">Rodapé</div>
     </BrCard>
-  )
+  );
 }
 ```
 
@@ -162,6 +155,7 @@ export default function CardExemplo() {
 ### 🔍 Consulte o arquivo [insights.md](./src/insights.md)
 
 Este arquivo contém:
+
 - **Referência completa de componentes** por categoria (entrada, saída, navegação, etc.)
 - **Props e eventos** de cada componente
 - **Exemplos de uso** detalhados
@@ -180,18 +174,21 @@ Este arquivo contém:
 ## 🎨 Guia de Evolução do Projeto
 
 ### Fase 1: Aprendizado (Este Template) ✅
+
 - [ ] Explorar componentes básicos (Button, Input, Card)
 - [ ] Entender como importar estilos e usar eventos
 - [ ] Revisar o `insights.md` para referência completa
 - [ ] Testar slots e eventos customizados
 
 ### Fase 2: Estrutura e Organização
+
 - [ ] Criar pasta `src/components/` para componentes reutilizáveis
 - [ ] Criar pasta `src/pages/` para páginas da aplicação
 - [ ] Separar `src/styles/` para estilos customizados
 - [ ] Implementar layouts comuns (Header, Menu, Footer, Sidebar)
 
 **Exemplo de estrutura:**
+
 ```
 src/
 ├── components/
@@ -218,6 +215,7 @@ src/
 ```
 
 ### Fase 3: Escalabilidade
+
 - [ ] Adicionar roteamento (React Router v6+)
 - [ ] Configurar estado global (Context API, Zustand ou Redux)
 - [ ] Integrar com APIs/backend
@@ -225,6 +223,7 @@ src/
 - [ ] Testes unitários (Vitest) e E2E (Playwright)
 
 ### Fase 4: Produção
+
 - [ ] Otimizar bundle e tree-shaking
 - [ ] Implementar PWA (se necessário)
 - [ ] Configurar CI/CD (GitHub Actions, GitLab CI)
@@ -267,7 +266,7 @@ Você pode sobrescrever tokens de cores, espaçamento, tipografia:
 :root {
   --color-primary: #004687;
   --spacing-unit: 8px;
-  --font-family-base: 'Raleway', sans-serif;
+  --font-family-base: "Raleway", sans-serif;
 }
 ```
 
@@ -277,14 +276,14 @@ Consulte a documentação oficial para a lista completa de tokens.
 
 ## 🐛 Troubleshooting
 
-| Problema | Solução |
-|----------|---------|
-| Estilos não carregando | Verifique se importou `@govbr-ds/core/dist/core-tokens.min.css` em `src/main.tsx` |
-| Eventos não funcionam | Use o prefixo `onBr` em camelCase (ex: `onBrClick`, `onBrChange`) |
-| Ícones não aparecem | Certifique-se de importar `@fortawesome/fontawesome-free/css/all.min.css` |
-| TypeScript com erros | Execute `npm install` novamente ou delete `node_modules` e `.lock` |
-| Build lento | Use `npm run build` e verifique se o tree-shaking está funcionando |
-| Componentes não renderizam | Certifique-se de estar dentro de um elemento React (não em HTML puro) |
+| Problema                   | Solução                                                                           |
+| -------------------------- | --------------------------------------------------------------------------------- |
+| Estilos não carregando     | Verifique se importou `@govbr-ds/core/dist/core-tokens.min.css` em `src/main.tsx` |
+| Eventos não funcionam      | Use o prefixo `onBr` em camelCase (ex: `onBrClick`, `onBrChange`)                 |
+| Ícones não aparecem        | Certifique-se de importar `@fortawesome/fontawesome-free/css/all.min.css`         |
+| TypeScript com erros       | Execute `npm install` novamente ou delete `node_modules` e `.lock`                |
+| Build lento                | Use `npm run build` e verifique se o tree-shaking está funcionando                |
+| Componentes não renderizam | Certifique-se de estar dentro de um elemento React (não em HTML puro)             |
 
 ---
 
@@ -316,50 +315,46 @@ git commit -m "test: descrição do teste"
 ### Estrutura de Componentes React
 
 ```tsx
-import { FC, useState } from 'react'
-import { BrButton, BrInput } from '@govbr-ds/webcomponents-react'
-import styles from './MeuComponente.module.css'
+import { FC, useState } from "react";
+import { BrButton, BrInput } from "@govbr-ds/webcomponents-react";
+import styles from "./MeuComponente.module.css";
 
 interface MeuComponenteProps {
-  titulo: string
-  onSubmit?: (dados: any) => void
-  disabled?: boolean
+  titulo: string;
+  onSubmit?: (dados: any) => void;
+  disabled?: boolean;
 }
 
-const MeuComponente: FC<MeuComponenteProps> = ({ 
-  titulo, 
-  onSubmit, 
-  disabled = false 
+const MeuComponente: FC<MeuComponenteProps> = ({
+  titulo,
+  onSubmit,
+  disabled = false,
 }) => {
-  const [valor, setValor] = useState('')
+  const [valor, setValor] = useState("");
 
   const handleClick = (ev: CustomEvent) => {
-    console.log('Clicado:', ev.detail)
-    onSubmit?.({ valor })
-  }
+    console.log("Clicado:", ev.detail);
+    onSubmit?.({ valor });
+  };
 
   return (
     <div className={styles.container}>
       <h2>{titulo}</h2>
-      
-      <BrInput 
+
+      <BrInput
         label="Entrada"
         onBrChange={(ev: CustomEvent) => setValor(ev.detail.value)}
         disabled={disabled}
       />
 
-      <BrButton 
-        emphasis="primary"
-        onBrClick={handleClick}
-        disabled={disabled}
-      >
+      <BrButton emphasis="primary" onBrClick={handleClick} disabled={disabled}>
         Enviar
       </BrButton>
     </div>
-  )
-}
+  );
+};
 
-export default MeuComponente
+export default MeuComponente;
 ```
 
 ### Tipagem com TypeScript
@@ -367,28 +362,28 @@ export default MeuComponente
 ```tsx
 // types.ts
 export interface Usuario {
-  id: string
-  nome: string
-  email: string
+  id: string;
+  nome: string;
+  email: string;
 }
 
 export interface FormDados {
-  nome: string
-  email: string
-  telefone?: string
+  nome: string;
+  email: string;
+  telefone?: string;
 }
 
 // MeuComponente.tsx
-import type { Usuario, FormDados } from './types'
+import type { Usuario, FormDados } from "./types";
 
 interface MeuComponenteProps {
-  usuario: Usuario
-  onSave: (dados: FormDados) => Promise<void>
+  usuario: Usuario;
+  onSave: (dados: FormDados) => Promise<void>;
 }
 
 const MeuComponente: FC<MeuComponenteProps> = ({ usuario, onSave }) => {
   // ...
-}
+};
 ```
 
 ---
@@ -403,7 +398,7 @@ const MeuComponente: FC<MeuComponenteProps> = ({ usuario, onSave }) => {
 - Teste com leitores de tela
 
 ```tsx
-<BrInput 
+<BrInput
   label="Email"
   placeholder="seu@email.com"
   aria-describedby="email-help"
@@ -446,16 +441,16 @@ Os componentes do Gov BR DS já são responsivos. Use classes CSS para adaptar l
 - Monitore o tamanho do bundle com `npm run build`
 
 ```tsx
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense } from "react";
 
-const FormavelsComponente = lazy(() => import('./FormavelsComponente'))
+const FormavelsComponente = lazy(() => import("./FormavelsComponente"));
 
 function App() {
   return (
     <Suspense fallback={<div>Carregando...</div>}>
       <FormavelsComponente />
     </Suspense>
-  )
+  );
 }
 ```
 
